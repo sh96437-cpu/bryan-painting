@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryan Painting — House painting in Auckland, free quotes</title>
+<meta name="description" content="Bryan Painting paints house exteriors and interiors in Auckland, New Zealand. 10 years of experience. Get a free quote.">
+<meta property="og:title" content="Bryan Painting — House painting in Auckland">
+<meta property="og:description" content="Exterior and interior house painting in Auckland. Get a free quote.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#09090B">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#quote" data-i18n="skip">Skip to the quote form</a>
+
+<header class="nav-wrap">
+  <nav class="nav glass" aria-label="Main">
+    <a class="brand" href="#top" aria-label="Bryan Painting home">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="4" width="15" height="7" rx="2" fill="#34D399"/><path d="M18 7.5h2.5V14H11v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="9.5" y="17" width="3" height="5" rx="1" fill="currentColor"/></svg>
+      <span>Bryan Painting</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services" data-i18n="nav.services">What we paint</a>
+      <a href="#how" data-i18n="nav.how">How quotes work</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+    </div>
+    <div class="nav-actions">
+      <button class="lang" type="button" id="langToggle" aria-label="한국어로 보기">한국어</button>
+      <a class="nav-cta" href="#quote" data-i18n="cta">Get a free quote</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero dark">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="place" data-i18n="hero.place">Auckland, New Zealand</p>
+        <h1 data-i18n="hero.title">Fresh paint, inside and out, for Auckland homes.</h1>
+        <p class="lede" data-i18n="hero.lede">Bryan Painting paints house exteriors and interiors in Auckland. Tell us which suburb you're in and we'll get back to you with a free quote.</p>
+        <a class="btn-pill" href="#quote">
+          <span data-i18n="cta">Get a free quote</span>
+          <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+
+      <div class="hero-visual">
+        <figure class="villa" aria-hidden="true">
+          <svg viewBox="0 0 400 320" role="presentation">
+            <defs>
+              <clipPath id="paintReveal">
+                <rect id="revealRect" x="0" y="0" width="0" height="320">
+                  <animate id="revealAnim" attributeName="width" from="0" to="400" begin="0.5s" dur="2.6s" fill="freeze" calcMode="spline" keySplines="0.45 0 0.25 1" keyTimes="0;1"/>
+                </rect>
+              </clipPath>
+              <clipPath id="bodyClip"><rect x="60" y="135" width="280" height="155"/></clipPath>
+            </defs>
+
+            <!-- Old, tired paint -->
+            <g class="old">
+              <polygon points="40,135 140,55 330,55 362,135" fill="#27272A" stroke="#52525B"/>
+              <rect x="60" y="135" width="280" height="155" fill="#3F3F46"/>
+              <g clip-path="url(#bodyClip)" stroke="#52525B" stroke-width="1">
+                <path d="M60 145H340M60 155H340M60 165H340M60 175H340M60 185H340M60 195H340M60 205H340M60 215H340M60 225H340M60 235H340M60 245H340M60 255H340M60 265H340M60 275H340M60 285H340"/>
+              </g>
+              <g fill="#52525B" opacity=".55">
+                <path d="M84 196c8-3 14 2 20-1 3 6-2 10-9 9-6 0-12-3-11-8z"/>
+                <path d="M300 262c6-2 11 1 15 0 1 5-3 7-8 7-4 0-8-2-7-7z"/>
+                <path d="M228 168c5-1 9 2 12 0 1 4-2 6-6 6-3 0-7-2-6-6z"/>
+              </g>
+              <polygon points="50,138 140,62 230,138" fill="#2F2F33" stroke="#52525B"/>
+              <circle cx="140" cy="108" r="9" fill="none" stroke="#52525B" stroke-width="2"/>
+              <rect x="98" y="168" width="84" height="84" fill="#18181B" stroke="#52525B" stroke-width="3"/>
+              <path d="M126 168V252M154 168V252" stroke="#52525B" stroke-width="3"/>
+              <rect x="210" y="135" width="132" height="14" fill="#2F2F33"/>
+              <path d="M222 149V290M282 149V290M338 149V290" stroke="#52525B" stroke-width="4"/>
+              <rect x="252" y="190" width="34" height="100" fill="#27272A" stroke="#52525B" stroke-width="2"/>
+              <rect x="300" y="186" width="26" height="62" fill="#18181B" stroke="#52525B" stroke-width="2"/>
+            </g>
+
+            <!-- Fresh paint, revealed by the roller -->
+            <g class="fresh" clip-path="url(#paintReveal)">
+              <polygon points="40,135 140,55 330,55 362,135" fill="#3F3F46" stroke="#71717A"/>
+              <rect x="60" y="135" width="280" height="155" fill="#FAFAFA"/>
+              <g clip-path="url(#bodyClip)" stroke="#D4D4D8" stroke-width="1">
+                <path d="M60 145H340M60 155H340M60 165H340M60 175H340M60 185H340M60 195H340M60 205H340M60 215H340M60 225H340M60 235H340M60 245H340M60 255H340M60 265H340M60 275H340M60 285H340"/>
+              </g>
+              <polygon points="50,138 140,62 230,138" fill="#F4F4F5" stroke="#A1A1AA"/>
+              <circle cx="140" cy="108" r="9" fill="none" stroke="#18181B" stroke-width="2"/>
+              <rect x="98" y="168" width="84" height="84" fill="#1F2937" stroke="#FFFFFF" stroke-width="3"/>
+              <path d="M126 168V252M154 168V252" stroke="#FFFFFF" stroke-width="3"/>
+              <rect x="210" y="135" width="132" height="14" fill="#E4E4E7"/>
+              <path d="M222 149V290M282 149V290M338 149V290" stroke="#FFFFFF" stroke-width="4"/>
+              <rect x="252" y="190" width="34" height="100" fill="#34D399" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="279" cy="242" r="2" fill="#064E3B"/>
+              <rect x="300" y="186" width="26" height="62" fill="#1F2937" stroke="#FFFFFF" stroke-width="2"/>
+            </g>
+
+            <!-- Steps and ground -->
+            <rect x="244" y="288" width="50" height="6" fill="#52525B"/>
+            <path d="M10 294H390" stroke="#3F3F46" stroke-width="2"/>
+
+            <!-- Roller -->
+            <g id="roller" class="roller">
+              <animateTransform id="rollerAnim" attributeName="transform" type="translate" from="-20 0" to="400 0" begin="0.5s" dur="2.6s" fill="freeze" calcMode="spline" keySplines="0.45 0 0.25 1" keyTimes="0;1"/>
+              <animate id="rollerFade" attributeName="opacity" from="1" to="0" begin="rollerAnim.end" dur="0.5s" fill="freeze"/>
+              <rect x="-7" y="44" width="14" height="250" rx="7" fill="#34D399"/>
+              <rect x="-4" y="44" width="3" height="250" rx="1.5" fill="#ffffff" opacity=".35"/>
+              <path d="M7 168h12v-30" fill="none" stroke="#A1A1AA" stroke-width="3" stroke-linecap="round"/>
+              <rect x="15" y="102" width="8" height="38" rx="4" fill="#E4E4E7"/>
+            </g>
+          </svg>
+        </figure>
+
+        <ul class="stats">
+          <li class="stat glass">
+            <strong data-i18n="stat1.big">10 years</strong>
+            <span data-i18n="stat1.small">painting homes</span>
+          </li>
+          <li class="stat glass">
+            <strong data-i18n="stat2.big">Free</strong>
+            <span data-i18n="stat2.small">quote for your home</span>
+          </li>
+          <li class="stat glass">
+            <strong data-i18n="stat3.big">Inside &amp; out</strong>
+            <span data-i18n="stat3.small">interior and exterior</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we paint -->
+  <section class="services" id="services">
+    <div class="split">
+      <div class="split-head">
+        <h2 data-i18n="services.title">What we paint</h2>
+        <p data-i18n="services.lede">Choose one or both when you ask for a quote.</p>
+      </div>
+      <div class="service-list">
+        <article class="service">
+          <svg class="service-art" viewBox="0 0 120 80" aria-hidden="true"><path d="M10 40 60 10l50 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="22" y="38" width="76" height="36" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 47h76M22 56h76M22 65h76" stroke="currentColor" stroke-width="1.5" opacity=".5"/><rect x="52" y="52" width="16" height="22" fill="#34D399"/></svg>
+          <h3 data-i18n="svc.ext.title">Exterior painting</h3>
+          <p data-i18n="svc.ext.body">The outside of your house: weatherboards and walls, trims, window frames and doors.</p>
+        </article>
+        <article class="service">
+          <svg class="service-art" viewBox="0 0 120 80" aria-hidden="true"><rect x="14" y="10" width="92" height="62" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 60h92" stroke="currentColor" stroke-width="1.5" opacity=".5"/><rect x="26" y="22" width="26" height="22" fill="none" stroke="currentColor" stroke-width="2"/><rect x="70" y="26" width="22" height="34" fill="#34D399"/></svg>
+          <h3 data-i18n="svc.int.title">Interior painting</h3>
+          <p data-i18n="svc.int.body">Inside your home: walls, ceilings, doors and skirting boards.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- What shapes the price -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-head">
+      <h2 data-i18n="price.title">What shapes your quote</h2>
+      <p data-i18n="price.lede">Every house is different, so we don't list fixed prices. We look at your home and give you a free quote.</p>
+    </div>
+    <div class="price-grid">
+      <article class="price-card">
+        <div class="swatch swatch-a" aria-hidden="true"></div>
+        <div class="price-body">
+          <h3 data-i18n="price.size.title">Size of the job</h3>
+          <p data-i18n="price.size.body">How many rooms, or how much wall and trim, there is to paint.</p>
+        </div>
+      </article>
+      <article class="price-card">
+        <div class="swatch swatch-b" aria-hidden="true"></div>
+        <div class="price-body">
+          <h3 data-i18n="price.cond.title">Condition of the surface</h3>
+          <p data-i18n="price.cond.body">Whether old paint needs scraping, filling or sanding before the new coat goes on.</p>
+        </div>
+      </article>
+      <article class="price-card">
+        <div class="swatch swatch-c" aria-hidden="true"></div>
+        <div class="price-body">
+          <h3 data-i18n="price.scope.title">Inside, outside or both</h3>
+          <p data-i18n="price.scope.body">Which parts of the house you want painted.</p>
+        </div>
+      </article>
+    </div>
+    <a class="btn-pill btn-dark" href="#quote">
+      <span data-i18n="cta">Get a free quote</span>
+      <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </section>
+
+  <!-- How it works -->
+  <section class="how dark" id="how">
+    <div class="how-inner">
+      <div>
+        <h2 data-i18n="how.title">How a free quote works</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-n">01</span>
+            <div>
+              <h3 data-i18n="how.1.title">Send a request</h3>
+              <p data-i18n="how.1.body">Leave your name, a phone number or email, and your suburb.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-n">02</span>
+            <div>
+              <h3 data-i18n="how.2.title">We get in touch</h3>
+              <p data-i18n="how.2.body">Bryan Painting contacts you to talk about the job and arrange a look at your home.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-n">03</span>
+            <div>
+              <h3 data-i18n="how.3.title">Get your free quote</h3>
+              <p data-i18n="how.3.body">You get the price and how long the job will take, then you decide.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="ticket-wrap" aria-hidden="true">
+        <div class="ticket glass">
+          <div class="ticket-top">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <p class="ticket-label" data-i18n="ticket.label">Quote request</p>
+          <div class="ticket-row"><span data-i18n="form.name">Name</span><i></i></div>
+          <div class="ticket-row"><span data-i18n="ticket.contact">Contact</span><i></i></div>
+          <div class="ticket-row"><span data-i18n="form.suburb">Suburb</span><i class="short"></i></div>
+          <div class="ticket-status">
+            <span class="chip on" data-i18n="status.new">New</span>
+            <span class="chip" data-i18n="status.contacted">Contacted</span>
+            <span class="chip" data-i18n="status.done">Done</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <h2 data-i18n="about.title">About Bryan Painting</h2>
+      <div class="about-body">
+        <p class="about-big" data-i18n="about.big">10 years of painting homes.</p>
+        <p data-i18n="about.body">Bryan Painting works on house exteriors and interiors in Auckland, New Zealand. Every quote is free.</p>
+      </div>
+    </div>
+
+    <!-- Before & after photos: add real photos here, then remove "hidden".
+    <div class="gallery" hidden></div> -->
+
+    <!-- Reviews: add real customer reviews word for word, then remove "hidden".
+    <div class="reviews" hidden></div> -->
+  </section>
+
+  <!-- Quote form -->
+  <section class="quote dark" id="quote">
+    <div class="quote-inner">
+      <div class="quote-copy">
+        <h2 data-i18n="form.title">Get a free quote</h2>
+        <p data-i18n="form.lede">Three details are all we need. We'll contact you to talk about your home.</p>
+        <p class="alt"><span data-i18n="form.alt">Prefer email?</span> <a href="mailto:sh96437@gmail.com">sh96437@gmail.com</a></p>
+      </div>
+
+      <form class="form glass" id="quoteForm" novalidate>
+        <label class="field">
+          <span data-i18n="form.name">Name</span>
+          <input name="name" type="text" autocomplete="name" required maxlength="50">
+        </label>
+        <label class="field">
+          <span data-i18n="form.contact">Phone or email</span>
+          <input name="contact" type="text" autocomplete="email" inputmode="email" required maxlength="100">
+        </label>
+        <label class="field">
+          <span data-i18n="form.suburb">Suburb</span>
+          <input name="suburb" type="text" autocomplete="address-level2" maxlength="100" data-i18n-ph="form.suburb.ph" placeholder="e.g. Mount Albert">
+        </label>
+        <label class="hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        <label class="consent">
+          <input name="consent" type="checkbox" required>
+          <span><span data-i18n="form.consent">I agree to Bryan Painting using these details only to contact me about my quote.</span> <a href="/privacy" data-i18n="form.privacy">Privacy notice</a></span>
+        </label>
+        <button class="btn-pill btn-submit" type="submit">
+          <span data-i18n="cta">Get a free quote</span>
+          <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p><strong>Bryan Painting</strong> <span data-i18n="footer.place">Auckland, New Zealand</span></p>
+  <p><a href="mailto:sh96437@gmail.com">sh96437@gmail.com</a> <a href="/privacy" data-i18n="form.privacy">Privacy notice</a></p>
+  <p class="copy">© <span id="year">2026</span> Bryan Painting</p>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
