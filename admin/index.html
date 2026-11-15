@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>문의함 — Bryan Painting 관리자</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+  [hidden] { display: none !important; }
+  :root { --ink:#18181B; --muted:#71717A; --line:#E4E4E7; --bg:#F4F4F5; --emerald:#34D399; --emerald-deep:#047857; --red:#B91C1C; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif; word-break: keep-all; }
+  main { max-width: 720px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 1.25rem; margin: 8px 0 20px; letter-spacing: -0.02em; }
+  button, input { font: inherit; }
+  .login { background: #fff; border-radius: 20px; padding: 24px; display: grid; gap: 12px; margin-top: 12vh; }
+  .login label { font-weight: 600; }
+  .login input { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; font-size: 1rem; }
+  .login input:focus { outline: 2px solid var(--emerald); border-color: transparent; }
+  .primary { background: var(--ink); color: #fff; border: 0; border-radius: 999px; padding: 14px 20px; font-weight: 600; cursor: pointer; min-height: 48px; }
+  .err { color: var(--red); min-height: 1.5em; margin: 0; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ghost { background: none; border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; cursor: pointer; min-height: 44px; }
+  .count { background: var(--ink); color: #fff; border-radius: 20px; padding: 20px 24px; margin-bottom: 16px; display: flex; align-items: baseline; gap: 12px; }
+  .count strong { font-size: 2.6rem; line-height: 1; color: var(--emerald); }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filters button { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; min-height: 40px; }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .list { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
+  .card { background: #fff; border-radius: 16px; padding: 18px; border: 1px solid var(--line); }
+  .card.is-new { border-color: var(--emerald); box-shadow: inset 4px 0 0 var(--emerald); }
+  .meta { color: var(--muted); font-size: .9rem; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .name { font-size: 1.15rem; font-weight: 700; margin: 6px 0 2px; }
+  .contact { display: inline-block; background: var(--bg); border: 0; border-radius: 10px; padding: 8px 12px; margin: 6px 0; cursor: pointer; font-size: 1rem; text-align: left; user-select: all; }
+  .suburb { margin: 4px 0 12px; }
+  .status { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .status button { border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 10px 6px; cursor: pointer; min-height: 44px; }
+  .status button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 600; }
+  .empty { background: #fff; border-radius: 16px; padding: 28px; text-align: center; color: var(--muted); }
+  .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: .9rem; }
+  :focus-visible { outline: 2px solid var(--emerald-deep); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <form class="login" id="loginForm">
+    <h1>Bryan Painting 관리자</h1>
+    <label for="pw">관리자 비밀번호</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <button class="primary" type="submit">문의함 열기</button>
+    <p class="err" id="loginErr" role="alert"></p>
+  </form>
+
+  <section id="box" hidden>
+    <div class="top">
+      <h1>문의함</h1>
+      <div>
+        <button class="ghost" id="refresh" type="button">새로고침</button>
+        <button class="ghost" id="logout" type="button">잠그기</button>
+      </div>
+    </div>
+    <div class="count"><strong id="newCount">0</strong><span>건의 새 문의</span></div>
+    <div class="filters" role="group" aria-label="상태별 보기">
+      <button type="button" data-filter="전체" aria-pressed="true">전체</button>
+      <button type="button" data-filter="새 문의" aria-pressed="false">새 문의</button>
+      <button type="button" data-filter="연락함" aria-pressed="false">연락함</button>
+      <button type="button" data-filter="완료" aria-pressed="false">완료</button>
+    </div>
+    <p class="err" id="boxErr" role="alert"></p>
+    <ul class="list" id="list"></ul>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+  const KEY = 'bp_admin_pw';
+  const STATUSES = ['새 문의', '연락함', '완료'];
+  const $ = (id) => document.getElementById(id);
+  const ss = {
+    get() { try { return sessionStorage.getItem(KEY) || ''; } catch { return ''; } },
+    set(v) { try { sessionStorage.setItem(KEY, v); } catch {} },
+    clear() { try { sessionStorage.removeItem(KEY); } catch {} },
+  };
+  let pw = ss.get();
+  let rows = [];
+  let filter = '전체';
+
+  const fmt = new Intl.DateTimeFormat('ko-KR', { timeZone: 'Pacific/Auckland', month: 'long', day: 'numeric', weekday: 'short', hour: 'numeric', minute: '2-digit' });
+
+  function toast(text) {
+    const t = $('toast'); t.textContent = text; t.hidden = false;
+    clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 1800);
+  }
+
+  async function api(method, body) {
+    const r = await fetch('/api/admin', {
+      method,
+      headers: { 'x-admin-password': pw, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const data = await r.json().catch(() => ({}));
+    return { status: r.status, data };
+  }
+
+  function lock(message) {
+    pw = ''; ss.clear();
+    $('box').hidden = true; $('loginForm').hidden = false;
+    $('loginErr').textContent = message || '';
+    $('pw').value = ''; $('pw').focus();
+  }
+
+  async function load() {
+    $('boxErr').textContent = '';
+    const { status, data } = await api('GET');
+    if (status === 401) return lock('비밀번호가 맞지 않아요.');
+    if (status !== 200) {
+      if ($('box').hidden) return lock(data.error || '불러오지 못했어요.');
+      $('boxErr').textContent = data.error || '불러오지 못했어요.';
+      return;
+    }
+    ss.set(pw);
+    rows = data.rows || [];
+    $('loginForm').hidden = true; $('box').hidden = false;
+    render();
+  }
+
+  function render() {
+    $('newCount').textContent = rows.filter((r) => r.status === '새 문의').length;
+    const list = $('list');
+    list.textContent = '';
+    const shown = filter === '전체' ? rows : rows.filter((r) => r.status === filter);
+    if (!shown.length) {
+      const li = document.createElement('li');
+      li.className = 'empty';
+      li.textContent = rows.length ? '이 상태의 문의가 없어요.' : '아직 들어온 문의가 없어요. 사이트에서 테스트 문의를 남겨 보세요.';
+      list.append(li);
+      return;
+    }
+    for (const r of shown) {
+      const li = document.createElement('li');
+      li.className = 'card' + (r.status === '새 문의' ? ' is-new' : '');
+
+      const meta = document.createElement('div'); meta.className = 'meta';
+      const when = document.createElement('span'); when.textContent = fmt.format(new Date(r.created_at)) + ' (오클랜드 시간)';
+      const lang = document.createElement('span'); lang.textContent = r.lang === 'ko' ? '한국어 화면에서 문의' : '영어 화면에서 문의';
+      meta.append(when, lang);
+
+      const name = document.createElement('p'); name.className = 'name'; name.textContent = r.name;
+      const contact = document.createElement('button'); contact.type = 'button'; contact.className = 'contact';
+      contact.textContent = r.contact; contact.title = '눌러서 복사';
+      contact.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(r.contact); toast('연락처를 복사했어요'); }
+        catch { const s = getSelection(); const rg = document.createRange(); rg.selectNodeContents(contact); s.removeAllRanges(); s.addRange(rg); toast('선택됐어요. 복사해 주세요'); }
+      });
+      const suburb = document.createElement('p'); suburb.className = 'suburb';
+      suburb.textContent = '동네: ' + (r.suburb || '(적지 않음)');
+
+      const st = document.createElement('div'); st.className = 'status'; st.setAttribute('role', 'group'); st.setAttribute('aria-label', '처리 상태');
+      for (const s of STATUSES) {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = s;
+        b.setAttribute('aria-pressed', String(r.status === s));
+        b.addEventListener('click', async () => {
+          if (r.status === s) return;
+          const { status, data } = await api('PATCH', { id: r.id, status: s });
+          if (status === 401) return lock('비밀번호가 맞지 않아요.');
+          if (status !== 200) { $('boxErr').textContent = data.error || '바꾸지 못했어요.'; return; }
+          toast(`'${s}'(으)로 바꿨어요`);
+          load();
+        });
+        st.append(b);
+      }
+      li.append(meta, name, contact, suburb, st);
+      list.append(li);
+    }
+  }
+
+  $('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    pw = $('pw').value;
+    if (!pw) return;
+    $('loginErr').textContent = '';
+    load();
+  });
+  $('refresh').addEventListener('click', load);
+  $('logout').addEventListener('click', () => lock(''));
+  document.querySelectorAll('[data-filter]').forEach((b) => b.addEventListener('click', () => {
+    filter = b.dataset.filter;
+    document.querySelectorAll('[data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    render();
+  }));
+
+  if (pw) load(); else $('pw').focus();
+})();
+</script>
+</body>
+</html>
